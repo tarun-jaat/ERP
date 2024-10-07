@@ -11,7 +11,7 @@ const PurchaseOrdersPage = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9001/api/account-fianance/sales"
+          "https://erp-backend-o5i3.onrender.com/api/account-fianance/sales"
         );
         setOrders(response.data); // Assuming the API returns an array of orders
       } catch (err) {

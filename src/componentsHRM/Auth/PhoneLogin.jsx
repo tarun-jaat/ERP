@@ -29,7 +29,7 @@ function PhoneLogin() {
 
     try {
       const res = await axios.post(
-        "http://localhost:9001/api/v1/user/sendotp",
+        "https://erp-backend-o5i3.onrender.com/api/v1/user/sendotp",
         {
           contactNumber, // Send the phone number
         }
@@ -65,7 +65,7 @@ function PhoneLogin() {
     }
 
     try {
-      const res = await axios.post("http://localhost:9001/api/v1/user/signup", {
+      const res = await axios.post("https://erp-backend-o5i3.onrender.com/api/v1/user/signup", {
         contactNumber,
         email,
         password,

@@ -80,7 +80,7 @@ function AddContact() {
 
     setIsSubmitting(true);
 
-    const url = "http://localhost:9001/api/v1/contact/createContact";
+    const url = "https://erp-backend-o5i3.onrender.com/api/v1/contact/createContact";
     try {
       await axios.post(url, formData);
       toast.success("Contact created successfully!");

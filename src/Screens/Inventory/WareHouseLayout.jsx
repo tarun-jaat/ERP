@@ -25,7 +25,7 @@ const WarehouseLayout = () => {
     const fetchWarehouses = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9001/api/v1/warehouses/warehouses"
+          "https://erp-backend-o5i3.onrender.com/api/v1/warehouses/warehouses"
         );
         setWarehouses(response.data);
       } catch (error) {
@@ -63,7 +63,7 @@ const WarehouseLayout = () => {
     try {
       if (newWarehouse.name && newWarehouse.location) {
         const response = await axios.post(
-          "http://localhost:9001/api/v1/warehouses/warehouses",
+          "https://erp-backend-o5i3.onrender.com/api/v1/warehouses/warehouses",
           newWarehouse,
           {
             headers: {
@@ -85,7 +85,7 @@ const WarehouseLayout = () => {
     try {
       if (newBin.name && newBin.warehouse) {
         const response = await axios.post(
-          "http://localhost:9001/api/v1/bins/bins",
+          "https://erp-backend-o5i3.onrender.com/api/v1/bins/bins",
           newBin,
           {
             headers: {
@@ -130,7 +130,7 @@ const WarehouseLayout = () => {
     try {
       if (newSection.name && newSection.bin && newSection.capacity) {
         const response = await axios.post(
-          "http://localhost:9001/api/v1/sections/sections",
+          "https://erp-backend-o5i3.onrender.com/api/v1/sections/sections",
           {
             name: newSection.name,
             bin: newSection.bin,

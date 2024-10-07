@@ -20,7 +20,7 @@ function LeadsHome() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:9001/api/v1/contact/getLeads') 
+    axios.get('https://erp-backend-o5i3.onrender.com/api/v1/contact/getLeads') 
       .then(response => {
         setData(response.data);
       })

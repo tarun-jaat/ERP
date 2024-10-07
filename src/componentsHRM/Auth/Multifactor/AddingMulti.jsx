@@ -24,7 +24,7 @@ const AddingMulti = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:9001/api/v1/user/enable2fa",
+        "https://erp-backend-o5i3.onrender.com/api/v1/user/enable2fa",
         {}, // Empty body for POST
         {
           headers: {
@@ -59,7 +59,7 @@ const AddingMulti = () => {
       }
   
       const res = await axios.post(
-        "http://localhost:9001/api/v1/user/verify2fa",
+        "https://erp-backend-o5i3.onrender.com/api/v1/user/verify2fa",
         { token: otp }, // Pass the OTP here
         {
           headers: {

@@ -10,7 +10,7 @@ function OrderDetails({ orderId }) {
     const fetchOrderDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9001/api/account-fianance/sales/${orderId}`
+          `https://erp-backend-o5i3.onrender.com/api/account-fianance/sales/${orderId}`
         );
         setOrderDetails(response.data);
       } catch (error) {

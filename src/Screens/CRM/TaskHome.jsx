@@ -62,7 +62,7 @@ function TaskHome() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:9001/api/v1/tasks') 
+    axios.get('https://erp-backend-o5i3.onrender.com/api/v1/tasks') 
       .then(response => {
         setData(response.data);
       })

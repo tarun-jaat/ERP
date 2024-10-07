@@ -13,7 +13,7 @@ function EditSalesOrder() {
     const fetchSale = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9001/api/account-fianance/sales/${id}`
+          `https://erp-backend-o5i3.onrender.com/api/account-fianance/sales/${id}`
         );
         setSale(response.data);
       } catch (error) {
@@ -49,7 +49,7 @@ function EditSalesOrder() {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:9001/api/account-fianance/sales/${id}`,
+        `https://erp-backend-o5i3.onrender.com/api/account-fianance/sales/${id}`,
         sale
       );
       navigate("/");
