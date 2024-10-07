@@ -72,28 +72,8 @@ function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="mb-4 w-[35%]">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="role"
-                >
-                  Role
-                </label>
-                <select
-                  className="bg-gray-50 border rounded w-full py-2 px-3 text-gray-700"
-                  id="role"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                >
-                  <option value="">Select your role</option>
-                  <option value="Administrator">Administrator</option>
-                  <option value="HR">HR</option>
-                  <option value="Manager">Manager</option>
-                  <option value="Employee">Employee</option>
-                </select>
-              </div>
+              
             </div>
-
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -144,12 +124,6 @@ function Login() {
             {/* Display login message */}
             {message && <p className="mt-4 text-red-500">{message}</p>}
           </form>
-
-          {/* Other Options */}
-          <div className="mt-6 text-center w-[63%]">
-            <p className="text-gray-600">You can also continue with Google</p>
-            <p className="text-gray-600 mt-2">New User? Sign Up now</p>
-          </div>
         </div>
 
         {/* Right Side - Image */}

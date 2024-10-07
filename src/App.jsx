@@ -40,7 +40,6 @@ import CentralizedControl from "./Screens/Inventory/CentralizedControl";
 import StockTransfer from "./Screens/Inventory/StocksTransfer";
 import LandingPage from "./Screens/LandingPage";
 
-
 import Homepage from "./componentsHRM/HRM/Home/Homepage";
 import AccountHome from "./componentsHRM/AccountFinance/Home/AccountHome";
 import Login from "./componentsHRM/Auth/Login";
@@ -49,26 +48,51 @@ import PhoneLogin from "./componentsHRM/Auth/PhoneLogin";
 import AddingMulti from "./componentsHRM/Auth/Multifactor/AddingMulti";
 import LiveChat from "./Components/LiveChat";
 
-
 const Layout = () => {
   const location = useLocation();
 
-  return (
-
-        <>
-        </>
-  );
+  return <></>;
 };
 
-
 function App() {
-  
   return (
     <div className="w-full">
       <Routes>
-        <Route path="/Landing" element={<LandingPage/>}/>
+        <Route path="/Landing" element={<LandingPage />} />
         <Route path="inventory" element={<InventoryDashBoard />}>
           <Route index element={<InventoryHome />} />
+          <Route path="stock-management" element={<InventoryItems />} />
+          <Route path="sku-management" element={<SKUManagement />} />
+          <Route path="warehouse/layout" element={<WarehouseLayout />} />
+          <Route path="warehouse/bin-management" element={<BinManagement />} />
+          <Route
+            path="warehouse/receiving-putaway"
+            element={<ReceivingAndPutaway />}
+          />
+          <Route
+            path="order/purchase-orders"
+            element={<PurchaseOrdersPage />}
+          />
+          <Route path="order/sales-orders" element={<SalesOrdersPage />} />
+          <Route
+            path="order/backorders-preorders"
+            element={<SalesReturnsPage />}
+          />
+          <Route path="auditing/cycle-counting" element={<CycleCounting />} />
+          <Route path="auditing/audit-trails" element={<AuditTrails />} />
+          <Route
+            path="auditing/reporting-analytics"
+            element={<ReportingAndAnalytics />}
+          />
+          <Route
+            path="multi-location/centralized-control"
+            element={<CentralizedControl />}
+          />
+          <Route
+            path="multi-location/stock-transfers"
+            element={<StockTransfer />}
+          />
+
           <Route path="stock-management" element={<InventoryItems/>}/>
           {/* <Route path="sku-management" element={<SKUManagement/>}/> */}
           <Route path="warehouse/layout" element={<WarehouseLayout/>}/>
@@ -82,6 +106,7 @@ function App() {
           <Route path="auditing/reporting-analytics" element={<ReportingAndAnalytics/>}/>
           <Route path="multi-location/centralized-control" element={<CentralizedControl/>}/>
           <Route path="multi-location/stock-transfers" element={<StockTransfer/>}/>
+
           {/* <Route path="procurement/reorder-point" element={<ReplenishmentAndProcurement/>}/> */}
           <Route path="*" element={<Navigate to="/inventory" replace />} />
         </Route>
@@ -112,17 +137,16 @@ function App() {
             <Route index element={<CallHome />} />
             <Route path="create-call" element={<ScheduleCallForm />} />
           </Route>
-          <Route path="chats" element={<LiveChat/>}/>
+          <Route path="chats" element={<LiveChat />} />
           {/* <Route path="reports" element={<Reports />} /> */}
           <Route path="*" element={<Navigate to="/CRM" replace />} />
         </Route>
-       <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/ad" element={<AddingMulti />} />
         <Route path="/mfa" element={<PhoneLogin />} />
         <Route path="/hrm/*" element={<Homepage />} />
         <Route path="/sales/*" element={<AccountHome />} />
-
       </Routes>
     </div>
   );

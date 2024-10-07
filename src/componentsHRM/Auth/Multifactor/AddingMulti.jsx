@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddingMulti = () => {
   const [qrCode, setQrCode] = useState("");
@@ -8,11 +9,11 @@ const AddingMulti = () => {
   const [message, setMessage] = useState("");
   const [otp, setOtp] = useState(""); // To store OTP input by the user
   const [isVerified, setIsVerified] = useState(false);
+  const navigate = useNavigate(); // Use the hook for navigation
 
   // Function to enable 2FA and display the QR code
   const enable2FA = async () => {
     const token = localStorage.getItem("authToken");
-    console.log(token);
     if (!token) {
       setError("Token not found. Please log in again.");
       return;
@@ -49,7 +50,7 @@ const AddingMulti = () => {
     setError("");
     setMessage("");
     setIsLoading(true);
-  
+
     try {
       const jwtToken = localStorage.getItem("authToken"); // JWT token from localStorage
       if (!jwtToken) {
@@ -57,7 +58,7 @@ const AddingMulti = () => {
         setIsLoading(false);
         return;
       }
-  
+
       const res = await axios.post(
         "https://erp-backend-o5i3.onrender.com/api/v1/user/verify2fa",
         { token: otp }, // Pass the OTP here
@@ -67,10 +68,10 @@ const AddingMulti = () => {
           },
         }
       );
-  
       if (res.data.message === "2FA token verified successfully") {
         setIsVerified(true);
         setMessage("2FA setup is complete and verified!");
+        navigate("/Landing");
       } else {
         setError("Invalid OTP. Please try again.");
       }
@@ -81,7 +82,6 @@ const AddingMulti = () => {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -97,12 +97,11 @@ const AddingMulti = () => {
           <>
             <div className="flex justify-center mb-6">
               <button
-                className={`bg-cyan-500 text-white font-bold py-2 px-6 rounded transition-all duration-300 ease-in-out
-                            ${
-                              isLoading
-                                ? "opacity-50 cursor-not-allowed"
-                                : "hover:bg-cyan-600"
-                            }`}
+                className={`bg-cyan-500 text-white font-bold py-2 px-6 rounded transition-all duration-300 ease-in-out ${
+                  isLoading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-cyan-600"
+                }`}
                 onClick={enable2FA}
                 disabled={isLoading || qrCode}
               >
@@ -141,12 +140,11 @@ const AddingMulti = () => {
                 />
                 <div className="flex justify-center">
                   <button
-                    className={`bg-green-500 text-white font-bold py-2 px-6 rounded transition-all duration-300 ease-in-out
-                                ${
-                                  isLoading
-                                    ? "opacity-50 cursor-not-allowed"
-                                    : "hover:bg-green-600"
-                                }`}
+                    className={`bg-green-500 text-white font-bold py-2 px-6 rounded transition-all duration-300 ease-in-out ${
+                      isLoading
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-green-600"
+                    }`}
                     onClick={verifyOTP}
                     disabled={isLoading || !otp}
                   >
@@ -157,7 +155,6 @@ const AddingMulti = () => {
             )}
           </>
         )}
-
         {/* Message display */}
         {message && (
           <p className="text-green-600 font-semibold text-center mt-4">
