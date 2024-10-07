@@ -21,10 +21,10 @@ const Data = [
         title: "Stock Management",
         path: "/inventory/stock-management",
       },
-      {
-        title: "SKU Management",
-        path: "/inventory/sku-management",
-      },
+      // {
+      //   title: "SKU Management",
+      //   path: "/inventory/sku-management",
+      // },
     ],
   },
   {

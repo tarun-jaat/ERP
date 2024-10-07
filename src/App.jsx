@@ -92,6 +92,21 @@ function App() {
             path="multi-location/stock-transfers"
             element={<StockTransfer />}
           />
+
+          <Route path="stock-management" element={<InventoryItems/>}/>
+          {/* <Route path="sku-management" element={<SKUManagement/>}/> */}
+          <Route path="warehouse/layout" element={<WarehouseLayout/>}/>
+          <Route path="warehouse/bin-management" element={<BinManagement/>}/>
+          <Route path="warehouse/receiving-putaway" element={<ReceivingAndPutaway/>}/>
+          <Route path="order/purchase-orders" element={<PurchaseOrdersPage/>}/>
+          <Route path="order/sales-orders" element={<SalesOrdersPage/>  }/>
+          <Route path="order/backorders-preorders" element={<SalesReturnsPage/>}/>
+          <Route path="auditing/cycle-counting" element={<CycleCounting/>}/>
+          <Route path="auditing/audit-trails" element={<AuditTrails/>}/>
+          <Route path="auditing/reporting-analytics" element={<ReportingAndAnalytics/>}/>
+          <Route path="multi-location/centralized-control" element={<CentralizedControl/>}/>
+          <Route path="multi-location/stock-transfers" element={<StockTransfer/>}/>
+
           {/* <Route path="procurement/reorder-point" element={<ReplenishmentAndProcurement/>}/> */}
           <Route path="*" element={<Navigate to="/inventory" replace />} />
         </Route>
