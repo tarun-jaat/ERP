@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="w-full">
       <Routes>
-        <Route path="/Landing" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="inventory" element={<InventoryDashBoard />}>
           <Route index element={<InventoryHome />} />
           <Route path="stock-management" element={<InventoryItems />} />
@@ -141,12 +141,12 @@ function App() {
           {/* <Route path="reports" element={<Reports />} /> */}
           <Route path="*" element={<Navigate to="/CRM" replace />} />
         </Route>
-        <Route path="/" element={<Login />} />
+        {/* <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/ad" element={<AddingMulti />} />
-        <Route path="/mfa" element={<PhoneLogin />} />
+        <Route path="/mfa" element={<PhoneLogin />} />*/}
         <Route path="/hrm/*" element={<Homepage />} />
-        <Route path="/sales/*" element={<AccountHome />} />
+        <Route path="/sales/*" element={<AccountHome />} /> 
       </Routes>
     </div>
   );
