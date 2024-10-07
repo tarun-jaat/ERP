@@ -70,7 +70,7 @@ function App() {
         <Route path="inventory" element={<InventoryDashBoard />}>
           <Route index element={<InventoryHome />} />
           <Route path="stock-management" element={<InventoryItems/>}/>
-          <Route path="sku-management" element={<SKUManagement/>}/>
+          {/* <Route path="sku-management" element={<SKUManagement/>}/> */}
           <Route path="warehouse/layout" element={<WarehouseLayout/>}/>
           <Route path="warehouse/bin-management" element={<BinManagement/>}/>
           <Route path="warehouse/receiving-putaway" element={<ReceivingAndPutaway/>}/>
