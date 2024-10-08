@@ -9,8 +9,8 @@ function Navbar() {
   return (
     <div className="bg-white  md:min-h-[70px] px-3 w-full flex items-center ">
       <div className=" md:flex hidden justify-between w-full items-center">
-        <h1>Company Name</h1>
-        <div className="md:flex gap-6 items-center">
+      <BackToHome/>
+      <div className="md:flex gap-6 items-center">
           <SearchBar />
           <RiNotification2Line fontSize={24} />
           {/* <img
@@ -18,7 +18,7 @@ function Navbar() {
             className="  h-[50px] w-[50px] rounded-full"
             alt="user"
           /> */}
-        <BackToHome/>
+        <h1>Company Name</h1>
         </div>
       </div>
 
