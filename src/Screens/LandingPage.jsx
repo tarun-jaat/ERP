@@ -9,7 +9,7 @@ const Data = [
   },
   {
     title: "HRM",
-    path: "/hrm",
+    path: "/hrm/dashboard",
     img: "https://cdn-icons-png.flaticon.com/512/10722/10722355.png",
     bg: "bg-yellow-400",
   },
@@ -21,7 +21,7 @@ const Data = [
   },
   {
     title: "Account and Finance",
-    path: "/sales",
+    path: "/sales/dashboard",
     img: "https://cdn-icons-png.flaticon.com/512/9503/9503519.png",
     bg: "bg-blue-400",
   },
@@ -34,17 +34,17 @@ function LandingPage() {
       <div className="flex flex-wrap gap-4 w-[50%] items-center h-full justify-center">
         {Data.map((item, index) => (
           <Link key={index} to={item.path}>
-          <div
-            className={`flex flex-col  h-[200px] w-[350px] ${item.bg} items-center justify-center rounded-lg cursor-pointer transition-all duration-300`}
-          >
-            <img
-              className="h-[140px] w-[130px]"
-              src={item.img}
-              alt={item.title}
-            />
-            <p className="text-xl">{item.title}</p>
-          </div>
-        </Link>
+            <div
+              className={`flex flex-col  h-[200px] w-[350px] ${item.bg} items-center justify-center rounded-lg cursor-pointer transition-all duration-300`}
+            >
+              <img
+                className="h-[140px] w-[130px]"
+                src={item.img}
+                alt={item.title}
+              />
+              <p className="text-xl">{item.title}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

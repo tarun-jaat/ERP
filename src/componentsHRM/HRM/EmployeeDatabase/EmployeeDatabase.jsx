@@ -176,7 +176,7 @@ function EmployeeDatabase() {
         </table>
 
         <div className="flex justify-around items-center mt-5 absolute bottom-10 w-[70%]">
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <p className="text-sm">
               Showing{" "}
               <span className="font-semibold">{indexOfFirstEntry + 1}</span> to{" "}
@@ -198,7 +198,7 @@ function EmployeeDatabase() {
               <option value={10}>10/page</option>
               <option value={20}>20/page</option>
             </select>
-          </div>
+          </div> */}
           <div className="flex gap-2 items-center">
             <MdKeyboardArrowLeft />
             {[...Array(totalPages)].map((_, i) => (
