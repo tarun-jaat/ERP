@@ -12,7 +12,7 @@ function DealsHome() {
   };
   useEffect(() => {
     axios
-      .get("https://erp-backend-o5i3.onrender.com/api/v1/deals")
+      .get("http://localhost:9001/api/v1/deals")
       .then((response) => {
         setData(response.data);
       })

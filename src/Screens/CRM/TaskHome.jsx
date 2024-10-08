@@ -1,60 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TableComponent from "../../Components/TableComponentWithCheckBox";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const columns = [
   { Header: "Subject", accessor: "subject" },
-  { Header: "Due Date", accessor: "due-date" },
+  { Header: "Due Date", accessor: "dueDate" },
   { Header: "status", accessor: "status" },
   { Header: "Priority", accessor: "priority" },
-  { Header: "Related To", accessor: "related-to" },
-  { Header: "Contact Name", accessor: "contact-name" },
-  { Header: "Contact Owner", accessor: "contact-owner" },
-];
-const data = [
-  {
-    id: 1,
-    subject: "New Client Acquisition",
-    "due-date": "2024-09-30",
-    status: "Open",
-    priority: "High",
-    "related-to": "Sales Team",
-    "contact-name": "John Doe",
-    "contact-owner": "Jane Smith",
-  },
-  {
-    id: 2,
-    subject: "Product Demo Follow-up",
-    "due-date": "2024-10-05",
-    status: "Closed",
-    priority: "Medium",
-    "related-to": "Client",
-    "contact-name": "Jane Smith",
-    "contact-owner": "John Doe",
-  },
-  {
-    id: 3,
-    subject: "Contract Negotiation",
-    "due-date": "2024-09-25",
-    status: "Open",
-    priority: "Low",
-    "related-to": "Sales Team",
-    "contact-name": "Alice Johnson",
-    "contact-owner": "Jane Smith",
-  },
-  {
-    id: 4,
-    subject: "Client Feedback Session",
-    "due-date": "2024-10-15",
-    status: "Open",
-    priority: "High",
-    "related-to": "Client",
-    "contact-name": "Tom Brown",
-    "contact-owner": "John Doe",
-  },
+  { Header: "Related To", accessor: "subject" },
+  { Header: "Contact Name", accessor: "contact" },
+  { Header: "Contact Owner", accessor: "taskOwner" },
 ];
 
 function TaskHome() {
+  const [data, setData] = useState([]); 
   const navigate = useNavigate();
 
   const HandleAddClick = () => {
@@ -62,14 +22,19 @@ function TaskHome() {
   };
 
   useEffect(() => {
-    axios.get('https://erp-backend-o5i3.onrender.com/api/v1/tasks') 
+    axios.get('http://localhost:9001/api/v1/contact/getTask') 
       .then(response => {
-        setData(response.data);
+        if (response.data) { // Check if data is not null or undefined
+          setData(response.data);
+        } else {
+          setData([]); // Set an empty array if no data is returned
+        }
       })
       .catch(error => {
         console.error(error);
       });
   }, []);
+
   return (
     <div className="w-full h-[90vh] pb-8">
       <div className="text-black mb-4 gap-10  flex justify-end ">
@@ -91,7 +56,7 @@ function TaskHome() {
           />
         </div>
       </div>
-      <div className="bg-white h-[90vh] rounded-2xl">
+      <div className="bg-white h-[80vh] overflow-y-scroll rounded-2xl">
         <TableComponent columns={columns} data={data} />
       </div>
     </div>

@@ -59,7 +59,7 @@ function AddLead() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const url = "https://erp-backend-o5i3.onrender.com/api/v1/contact/createLead";
+    const url = "http://localhost:9001/api/v1/contact/createLead";
     const leadData = {
       ...formData,
       notes: [{ note: formData.notes[0].note, date: new Date() }],

@@ -3,21 +3,22 @@ import SearchBar from "./SearchBar";
 import { RiNotification2Line } from "react-icons/ri";
 import { RiMenu4Line } from "react-icons/ri";
 import { RiNotification2Fill } from "react-icons/ri";
+import BackToHome from "./BackToHome";
 
 function Navbar() {
   return (
-    <div className="bg-white  md:min-h-[70px] w-full flex items-center ">
+    <div className="bg-white  md:min-h-[70px] px-3 w-full flex items-center ">
       <div className=" md:flex hidden justify-between w-full items-center">
         <h1>Company Name</h1>
         <div className="md:flex gap-6 items-center">
           <SearchBar />
           <RiNotification2Line fontSize={24} />
-          <img
+          {/* <img
             src="https://th.bing.com/th/id/OIP.IGNf7GuQaCqz_RPq5wCkPgHaLH?rs=1&pid=ImgDetMain"
             className="  h-[50px] w-[50px] rounded-full"
             alt="user"
-          />
-          <p className="text-lg font-semibold">xxxx xxxxx</p>
+          /> */}
+        <BackToHome/>
         </div>
       </div>
 

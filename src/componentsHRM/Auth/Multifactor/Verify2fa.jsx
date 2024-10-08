@@ -8,7 +8,7 @@ const Verify2fa = () => {
   const verify2FA = async () => {
     try {
       const res = await axios.post(
-        "https://erp-backend-o5i3.onrender.com/api/v1/user/verify2FA",
+        "http://localhost:9001/api/v1/user/verify2FA",
         {
           token,
           userId: "USER_ID",

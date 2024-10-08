@@ -22,7 +22,7 @@ function FinancialReporting() {
   const fetchReports = async () => {
     try {
       const response = await axios.get(
-        "https://erp-backend-o5i3.onrender.com/api/account-fianance/financial-reports"
+        "http://localhost:9001/api/account-fianance/financial-reports"
       );
       setReports(response.data);
     } catch (error) {
@@ -62,7 +62,7 @@ function FinancialReporting() {
         return obj;
       }, {});
       await axios.post(
-        "https://erp-backend-o5i3.onrender.com/api/account-fianance/financial-reports",
+        "http://localhost:9001/api/account-fianance/financial-reports",
         {
           ...newReport,
           reportData: formattedReportData,

@@ -67,7 +67,7 @@ const data = [
 function Accounts() {
   return (
     <div className="w-full h-[90vh] pb-8">
-      <div className="text-black mb-4 gap-10 overflow-y-scroll flex justify-end ">
+      <div className="text-black mb-4 gap-10 flex justify-end ">
         {/* <button className="bg-[#0097AB] text-white w-[213px] h-[38px] rounded-full">
           + Create Contact
         </button> */}
@@ -86,7 +86,10 @@ function Accounts() {
           />
         </div>
       </div>
+      <div className="bg-white h-[80vh] overflow-y-scroll rounded-2xl">
       <TableComponent columns={columns} data={data} />
+
+      </div>
     </div>
   );
 }

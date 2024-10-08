@@ -9,7 +9,7 @@ function InterviewSchedul() {
     const fetchJobPostings = async () => {
       try {
         const response = await fetch(
-          "https://erp-backend-o5i3.onrender.com/api/recruitment/get-job-posting"
+          "http://localhost:9001/api/recruitment/get-job-posting"
         );
 
         if (!response.ok) {
@@ -29,7 +29,7 @@ function InterviewSchedul() {
   const handleStatusChange = async (jobId, applicantId, newStatus) => {
     try {
       const response = await fetch(
-        `https://erp-backend-o5i3.onrender.com/api/recruitment/update-applicant-job-posting/${jobId}/${applicantId}`,
+        `http://localhost:9001/api/recruitment/update-applicant-job-posting/${jobId}/${applicantId}`,
         {
           method: "PATCH",
           headers: {

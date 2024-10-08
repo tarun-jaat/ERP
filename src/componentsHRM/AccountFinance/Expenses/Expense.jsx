@@ -27,7 +27,7 @@ function ExpenseTable() {
   const fetchExpenses = async () => {
     try {
       const response = await axios.get(
-        "https://erp-backend-o5i3.onrender.com/api/account-fianance/expenses"
+        "http://localhost:9001/api/account-fianance/expenses"
       );
       setExpenses(response.data);
     } catch (error) {
@@ -44,7 +44,7 @@ function ExpenseTable() {
     e.preventDefault();
     try {
       await axios.post(
-        "https://erp-backend-o5i3.onrender.com/api/account-fianance/expenses",
+        "http://localhost:9001/api/account-fianance/expenses",
         newExpense
       );
       fetchExpenses();

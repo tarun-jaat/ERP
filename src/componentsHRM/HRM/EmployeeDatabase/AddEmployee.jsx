@@ -30,7 +30,7 @@ function AddEmployee() {
 
     try {
       const response = await fetch(
-        "https://erp-backend-o5i3.onrender.com/api/employee/register",
+        "http://localhost:9001/api/employee/register",
         {
           method: "POST",
           headers: {

@@ -13,7 +13,8 @@ const WarehouseLayout = () => {
     name: "",
     warehouse: "",
     bin: "",
-  }); // Added warehouse to newSection state
+    capacity: 0, // Added capacity to newSection state
+  });
   const [isWarehouseModalOpen, setIsWarehouseModalOpen] = useState(false);
   const [isBinModalOpen, setIsBinModalOpen] = useState(false);
   const [isSectionModalOpen, setIsSectionModalOpen] = useState(false); // Modal state for sections
@@ -25,7 +26,7 @@ const WarehouseLayout = () => {
     const fetchWarehouses = async () => {
       try {
         const response = await axios.get(
-          "https://erp-backend-o5i3.onrender.com/api/v1/warehouses/warehouses"
+          "http://localhost:9001/api/v1/warehouses/warehouses"
         );
         setWarehouses(response.data);
       } catch (error) {
@@ -63,7 +64,7 @@ const WarehouseLayout = () => {
     try {
       if (newWarehouse.name && newWarehouse.location) {
         const response = await axios.post(
-          "https://erp-backend-o5i3.onrender.com/api/v1/warehouses/warehouses",
+          "http://localhost:9001/api/v1/warehouses/warehouses",
           newWarehouse,
           {
             headers: {
@@ -85,7 +86,7 @@ const WarehouseLayout = () => {
     try {
       if (newBin.name && newBin.warehouse) {
         const response = await axios.post(
-          "https://erp-backend-o5i3.onrender.com/api/v1/bins/bins",
+          "http://localhost:9001/api/v1/bins/bins",
           newBin,
           {
             headers: {
@@ -112,25 +113,23 @@ const WarehouseLayout = () => {
     } catch (error) {
       console.error("Error adding bin:", error);
       setError(
-        "Error adding bin: " + error.response?.data?.error || error.message
+        "Error adding bin: " + (error.response?.data?.error || error.message)
       );
     }
   };
-
-
 
   // Handle capacity input change for new section
   const handleSectionCapacityChange = (e) => {
     const { value } = e.target;
     setNewSection((prev) => ({ ...prev, capacity: parseInt(value) }));
   };
-  
+
   // Handle adding a new section
   const addSection = async () => {
     try {
       if (newSection.name && newSection.bin && newSection.capacity) {
         const response = await axios.post(
-          "https://erp-backend-o5i3.onrender.com/api/v1/sections/sections",
+          "http://localhost:9001/api/v1/sections/sections",
           {
             name: newSection.name,
             bin: newSection.bin,
@@ -142,7 +141,7 @@ const WarehouseLayout = () => {
             },
           }
         );
-  
+
         // Update the warehouse state to include the new section in the correct bin
         setWarehouses((prev) =>
           prev.map((warehouse) =>
@@ -151,14 +150,17 @@ const WarehouseLayout = () => {
                   ...warehouse,
                   bins: warehouse.bins.map((bin) =>
                     bin._id === newSection.bin
-                      ? { ...bin, sections: [...(bin.sections || []), response.data] }
+                      ? {
+                          ...bin,
+                          sections: [...(bin.sections || []), response.data],
+                        }
                       : bin
                   ),
                 }
               : warehouse
           )
         );
-  
+
         setNewSection({ name: "", warehouse: "", bin: "", capacity: 0 });
         setIsSectionModalOpen(false);
         setError(null); // Reset error state if successful
@@ -167,10 +169,12 @@ const WarehouseLayout = () => {
       }
     } catch (error) {
       console.error("Error adding section:", error);
-      setError("Error adding section: " + error.response?.data?.error || error.message);
+      setError(
+        "Error adding section: " + (error.response?.data?.error || error.message)
+      );
     }
   };
-  
+
   return (
     <div className="container mx-auto px-4 py-6">
       <h2 className="text-2xl font-semibold mb-6">Warehouse Layout</h2>
@@ -243,7 +247,9 @@ const WarehouseLayout = () => {
                                 {bin.name}
                               </td>
                             ) : null}
-                            <td className="px-4 py-2 text-center">{section.name}</td>
+                            <td className="px-4 py-2 text-center">
+                              {section.name}
+                            </td>
                             <td className="px-4 py-2 text-center">
                               {section.items && section.items.length > 0
                                 ? section.items.join(", ")
@@ -257,8 +263,10 @@ const WarehouseLayout = () => {
                             {warehouse.name}
                           </td>
                           <td className="px-4 py-2 text-center">{bin.name}</td>
-                          <td className="px-4 py-2 text-center">No sections</td>
-                          <td className="px-4 py-2 text-center">No items</td>
+                          <td
+                            className="px-4 py-2 text-center"
+                            colSpan={2}
+                          ></td>
                         </tr>
                       )}
                     </React.Fragment>
@@ -266,9 +274,9 @@ const WarehouseLayout = () => {
                 ) : (
                   <tr className="border-b border-gray-200 hover:bg-gray-100">
                     <td className="px-4 py-2 text-center">{warehouse.name}</td>
-                    <td className="px-4 py-2 text-center">No bins</td>
-                    <td className="px-4 py-2 text-center">No sections</td>
-                    <td className="px-4 py-2 text-center">No items</td>
+                    <td className="px-4 py-2 text-center" colSpan={3}>
+                      No bins
+                    </td>
                   </tr>
                 )}
               </React.Fragment>
@@ -277,153 +285,171 @@ const WarehouseLayout = () => {
         </table>
       </div>
 
-      {/* Modals for Adding Warehouse, Bin, Section */}
+      {/* Warehouse Modal */}
       {isWarehouseModalOpen && (
-        <div className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
             <h3 className="text-xl font-semibold mb-4">Add New Warehouse</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder="Warehouse Name"
-              value={newWarehouse.name}
-              onChange={handleWarehouseInputChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            />
-            <input
-              type="text"
-              name="location"
-              placeholder="Location"
-              value={newWarehouse.location}
-              onChange={handleWarehouseInputChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            />
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Warehouse Name</label>
+              <input
+                type="text"
+                name="name"
+                value={newWarehouse.name}
+                onChange={handleWarehouseInputChange}
+                className="border px-4 py-2 w-full"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Location</label>
+              <input
+                type="text"
+                name="location"
+                value={newWarehouse.location}
+                onChange={handleWarehouseInputChange}
+                className="border px-4 py-2 w-full"
+              />
+            </div>
             <div className="flex justify-end">
               <button
+                onClick={() => setIsWarehouseModalOpen(false)}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2"
+              >
+                Cancel
+              </button>
+              <button
                 onClick={addWarehouse}
-                className="bg-blue-500 text-white px-4 py-2 text-center rounded"
+                className="bg-blue-500 text-white px-4 py-2 rounded"
               >
                 Add Warehouse
               </button>
-              <button
-                onClick={() => setIsWarehouseModalOpen(false)}
-                className="ml-4 bg-gray-500 text-white px-4 py-2 text-center rounded"
-              >
-                Cancel
-              </button>
             </div>
           </div>
         </div>
       )}
 
+      {/* Bin Modal */}
       {isBinModalOpen && (
-        <div className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
             <h3 className="text-xl font-semibold mb-4">Add New Bin</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder="Bin Name"
-              value={newBin.name}
-              onChange={handleBinInputChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            />
-            <select
-              name="warehouse"
-              value={newBin.warehouse}
-              onChange={handleBinInputChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            >
-              <option value="">Select Warehouse</option>
-              {warehouses.map((warehouse) => (
-                <option key={warehouse._id} value={warehouse._id}>
-                  {warehouse.name}
-                </option>
-              ))}
-            </select>
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Bin Name</label>
+              <input
+                type="text"
+                name="name"
+                value={newBin.name}
+                onChange={handleBinInputChange}
+                className="border px-4 py-2 w-full"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Warehouse</label>
+              <select
+                name="warehouse"
+                value={newBin.warehouse}
+                onChange={handleBinInputChange}
+                className="border px-4 py-2 w-full"
+              >
+                <option value="">Select a warehouse</option>
+                {warehouses.map((warehouse) => (
+                  <option key={warehouse._id} value={warehouse._id}>
+                    {warehouse.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="flex justify-end">
               <button
+                onClick={() => setIsBinModalOpen(false)}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2"
+              >
+                Cancel
+              </button>
+              <button
                 onClick={addBin}
-                className="bg-green-500 text-white px-4 py-2 text-center rounded"
+                className="bg-green-500 text-white px-4 py-2 rounded"
               >
                 Add Bin
               </button>
-              <button
-                onClick={() => setIsBinModalOpen(false)}
-                className="ml-4 bg-gray-500 text-white px-4 py-2 text-center rounded"
-              >
-                Cancel
-              </button>
             </div>
           </div>
         </div>
       )}
 
+      {/* Section Modal */}
       {isSectionModalOpen && (
-        <div className="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
             <h3 className="text-xl font-semibold mb-4">Add New Section</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder="Section Name"
-              value={newSection.name}
-              onChange={handleSectionInputChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            />
-            <select
-              name="warehouse"
-              value={selectedWarehouse}
-              onChange={handleWarehouseSelection}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            >
-              <option value="">Select Warehouse</option>
-              {warehouses.map((warehouse) => (
-                <option key={warehouse._id} value={warehouse._id}>
-                  {warehouse.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Bin Selection */}
-            <select
-              name="bin"
-              value={newSection.bin}
-              onChange={handleSectionInputChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            >
-              <option value="">Select Bin</option>
-              {selectedWarehouse &&
-                warehouses
-                  .find((warehouse) => warehouse._id === selectedWarehouse)
-                  ?.bins.map((bin) => (
-                    <option key={bin._id} value={bin._id}>
-                      {bin.name}
-                    </option>
-                  ))}
-            </select>
-
-            <input
-              type="number"
-              name="capacity"
-              placeholder="Capacity"
-              value={newSection.capacity}
-              onChange={handleSectionCapacityChange}
-              className="border border-gray-300 p-2 rounded w-full mb-4"
-            />
-
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Section Name</label>
+              <input
+                type="text"
+                name="name"
+                value={newSection.name}
+                onChange={handleSectionInputChange}
+                className="border px-4 py-2 w-full"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Warehouse</label>
+              <select
+                name="warehouse"
+                value={selectedWarehouse}
+                onChange={handleWarehouseSelection}
+                className="border px-4 py-2 w-full"
+              >
+                <option value="">Select a warehouse</option>
+                {warehouses.map((warehouse) => (
+                  <option key={warehouse._id} value={warehouse._id}>
+                    {warehouse.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {selectedWarehouse && (
+              <div className="mb-4">
+                <label className="block mb-2 font-semibold">Bin</label>
+                <select
+                  name="bin"
+                  value={newSection.bin}
+                  onChange={handleSectionInputChange}
+                  className="border px-4 py-2 w-full"
+                >
+                  <option value="">Select a bin</option>
+                  {warehouses
+                    .find((wh) => wh._id === selectedWarehouse)
+                    .bins.map((bin) => (
+                      <option key={bin._id} value={bin._id}>
+                        {bin.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
+            <div className="mb-4">
+              <label className="block mb-2 font-semibold">Capacity</label>
+              <input
+                type="number"
+                name="capacity"
+                value={newSection.capacity}
+                onChange={handleSectionCapacityChange}
+                className="border px-4 py-2 w-full"
+              />
+            </div>
             <div className="flex justify-end">
               <button
-                onClick={addSection}
-                className="bg-yellow-500 text-white px-4 py-2 text-center rounded"
-              >
-                Add Section
-              </button>
-              <button
                 onClick={() => setIsSectionModalOpen(false)}
-                className="ml-4 bg-gray-500 text-white px-4 py-2 text-center rounded"
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2"
               >
                 Cancel
+              </button>
+              <button
+                onClick={addSection}
+                className="bg-yellow-500 text-white px-4 py-2 rounded"
+              >
+                Add Section
               </button>
             </div>
           </div>

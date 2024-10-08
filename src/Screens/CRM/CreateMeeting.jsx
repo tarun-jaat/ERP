@@ -53,7 +53,7 @@ const MeetingForm = () => {
     console.log('Form submitted: ', formData);
 
     try {
-      const response = await axios.post('https://erp-backend-o5i3.onrender.com/api/v1/meetings/create', formData);
+      const response = await axios.post('http://localhost:9001/api/v1/meetings/create', formData);
       console.log('Data uploaded successfully:', response.data);
       toast.success("Meeting created successfully!", { position: "top-right" });
 

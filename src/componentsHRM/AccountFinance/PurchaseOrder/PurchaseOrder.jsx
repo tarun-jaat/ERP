@@ -27,7 +27,7 @@ function PurchaseOrder() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "https://erp-backend-o5i3.onrender.com/api/account-fianance/purchase-orders"
+        "http://localhost:9001/api/account-fianance/purchase-orders"
       );
       setOrders(response.data);
     } catch (error) {
@@ -37,7 +37,7 @@ function PurchaseOrder() {
 
   const fetchVendors = async () => {
     try {
-      const response = await axios.get("https://erp-backend-o5i3.onrender.com/api/v1/vendors");
+      const response = await axios.get("http://localhost:9001/api/v1/vendors");
       setVendors(response.data);
     } catch (error) {
       console.error("Error fetching vendors:", error);
@@ -86,7 +86,7 @@ function PurchaseOrder() {
     e.preventDefault();
     try {
       await axios.post(
-        "https://erp-backend-o5i3.onrender.com/api/account-fianance/purchase-orders",
+        "http://localhost:9001/api/account-fianance/purchase-orders",
         newOrder
       );
       fetchOrders(); // Refresh order list

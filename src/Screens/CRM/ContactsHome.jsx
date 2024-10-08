@@ -19,7 +19,7 @@ function ContactsHome() {
     };
 
     useEffect(() => {
-      axios.get('https://erp-backend-o5i3.onrender.com/api/v1/contact/getContact') 
+      axios.get('http://localhost:9001/api/v1/contact/getContact') 
         .then(response => {
           setData(response.data);
         })
@@ -48,7 +48,7 @@ function ContactsHome() {
           />
         </div>
       </div>
-      <div className="bg-white h-[90vh] rounded-2xl">
+      <div className="bg-white h-[80vh] overflow-y-scroll rounded-2xl">
       <TableComponent columns={columns} data={data} />
 
       </div>

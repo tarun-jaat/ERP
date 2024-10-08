@@ -16,7 +16,7 @@ function Dashboard() {
     const fetchStaffData = async () => {
       try {
         const response = await fetch(
-          "https://erp-backend-o5i3.onrender.com/api/employee/getEmployee"
+          "http://localhost:9001/api/employee/getEmployee"
         );
         const data = await response.json();
         setStaffData(data);
