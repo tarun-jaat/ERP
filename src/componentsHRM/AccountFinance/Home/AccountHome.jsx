@@ -8,11 +8,13 @@ import ExpenseTable from "../Expenses/Expense";
 import PurchaseOrder from "../PurchaseOrder/PurchaseOrder";
 import FinancialReporting from "../FinancialReporting/FinancialReporting";
 import AccountDashboard from "../Dashboard/AccountDashboard";
+import Navbar from "../../../Components/Navbar";
 
 function AccountHome() {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
-      <div className="flex mt-16">
+      <Navbar/>
+      <div className="flex">
         <Sidebar />
         <div className="flex-grow ml-72 p-4 bg-gray-100 h-[calc(100vh-4rem)]">
           <Routes>
