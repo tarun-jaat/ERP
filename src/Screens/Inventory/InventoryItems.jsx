@@ -3,11 +3,13 @@ import Modal from "react-modal";
 import { CSVLink } from "react-csv";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Papa from "papaparse"; // Import PapaParse
 
 const InventoryItems = () => {
   const [filter, setFilter] = useState("all");
   const [stock, setStock] = useState([]); // Stores all inventory items
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [importModalOpen, setImportModalOpen] = useState(false); // Modal state for import
   const [warehouses, setWarehouses] = useState([]); // Stores fetched warehouses
   const [bins, setBins] = useState([]); // Stores bins within the selected warehouse
   const [sections, setSections] = useState([]); // Stores sections within the selected bin
@@ -20,6 +22,7 @@ const InventoryItems = () => {
     category: "",
     stockLevel: "",
   });
+  const [file, setFile] = useState(null); // Store the uploaded file
 
   // Fetch stock items from the backend on component mount
   useEffect(() => {
@@ -44,6 +47,38 @@ const InventoryItems = () => {
     fetchStock();
     fetchWarehouses();
   }, []);
+
+  // Handle file selection for import
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  // Handle importing the CSV file
+  const handleImport = () => {
+    if (file) {
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: async (results) => {
+          try {
+            const parsedData = results.data;
+            // Send parsed CSV data to backend API
+            await axios.post("https://erp-backend-o5i3.onrender.com/api/v1/items/import", parsedData);
+            toast.success("Items imported successfully");
+            setImportModalOpen(false);
+            // Refresh inventory items after import
+            const response = await axios.get("https://erp-backend-o5i3.onrender.com/api/v1/items/items");
+            setStock(response.data);
+          } catch (error) {
+            console.error("Error importing data:", error);
+            toast.error("Error importing data");
+          }
+        },
+      });
+    } else {
+      toast.error("Please select a file to import");
+    }
+  };
 
   // Handle filter change
   const handleFilterChange = (event) => {
@@ -85,7 +120,7 @@ const InventoryItems = () => {
       setNewItem({ warehouseId: "", binId: "", sectionId: "", itemName: "", sku: "", category: "", stockLevel: "" });
     } catch (error) {
       console.error("Error adding new item:", error);
-      toast.error(error)
+      toast.error("Error adding item");
     }
   };
 
@@ -99,102 +134,41 @@ const InventoryItems = () => {
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         ariaHideApp={false}
       >
+        {/* Add Item Form */}
+        {/* ... your add item modal code ... */}
+      </Modal>
+
+      {/* Modal for importing items */}
+      <Modal
+        isOpen={importModalOpen}
+        onRequestClose={() => setImportModalOpen(false)}
+        className="flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+        ariaHideApp={false}
+      >
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
-          <h2 className="text-xl mb-4">Add New Item</h2>
+          <h2 className="text-xl mb-4">Import Items</h2>
           <form className="flex flex-col gap-4">
-            {/* Warehouse Selection */}
-            <select
-              name="warehouseId"
-              value={newItem.warehouseId}
-              onChange={handleNewItemChange}
-              className="border p-2 rounded-lg"
-            >
-              <option value="">Select Warehouse</option>
-              {warehouses.map((warehouse) => (
-                <option key={warehouse._id} value={warehouse._id}>
-                  {warehouse.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Bin Selection */}
-            <select
-              name="binId"
-              value={newItem.binId}
-              onChange={handleNewItemChange}
-              className="border p-2 rounded-lg"
-              disabled={!bins.length}
-            >
-              <option value="">Select Bin</option>
-              {bins.map((bin) => (
-                <option key={bin._id} value={bin._id}>
-                  {bin.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Section Selection */}
-            <select
-              name="sectionId"
-              value={newItem.sectionId}
-              onChange={handleNewItemChange}
-              className="border p-2 rounded-lg"
-              disabled={!sections.length}
-            >
-              <option value="">Select Section</option>
-              {sections.map((section) => (
-                <option key={section._id} value={section._id}>
-                  {section.name}
-                </option>
-              ))}
-            </select>
-
             <input
-              type="text"
-              name="itemName"
-              placeholder="Item Name"
+              type="file"
+              accept=".csv"
+              onChange={handleFileChange}
               className="border p-2 rounded-lg"
-              value={newItem.itemName}
-              onChange={handleNewItemChange}
-            />
-            <input
-              type="text"
-              name="sku"
-              placeholder="SKU"
-              className="border p-2 rounded-lg"
-              value={newItem.sku}
-              onChange={handleNewItemChange}
-            />
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              className="border p-2 rounded-lg"
-              value={newItem.category}
-              onChange={handleNewItemChange}
-            />
-            <input
-              type="number"
-              name="stockLevel"
-              placeholder="Stock Level"
-              className="border p-2 rounded-lg"
-              value={newItem.stockLevel}
-              onChange={handleNewItemChange}
             />
             <div className="flex justify-end gap-4">
               <button
                 type="button"
                 className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                onClick={() => setModalIsOpen(false)}
+                onClick={() => setImportModalOpen(false)}
               >
                 Cancel
               </button>
               <button
                 type="button"
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                onClick={handleAddItem}
+                onClick={handleImport}
               >
-                Add Item
+                Import
               </button>
             </div>
           </form>
@@ -208,15 +182,9 @@ const InventoryItems = () => {
           value={filter}
           onChange={handleFilterChange}
         >
-          <option className="text-sm" value="all">
-            All Items
-          </option>
-          <option className="text-sm" value="active">
-            Active Items
-          </option>
-          <option className="text-sm" value="inactive">
-            Inactive Items
-          </option>
+          <option className="text-sm" value="all">All Items</option>
+          <option className="text-sm" value="active">Active Items</option>
+          <option className="text-sm" value="inactive">Inactive Items</option>
         </select>
         <div className="flex items-center gap-4">
           <button
@@ -225,7 +193,10 @@ const InventoryItems = () => {
           >
             + New
           </button>
-          <button className="bg-blue-600 p-1 text-white px-2 rounded-lg">
+          <button
+            className="bg-blue-600 p-1 text-white px-2 rounded-lg"
+            onClick={() => setImportModalOpen(true)}
+          >
             + Import
           </button>
           <CSVLink
@@ -248,16 +219,18 @@ const InventoryItems = () => {
               <th className="px-4 py-2">Category</th>
               <th className="px-4 py-2">Stock Level</th>
               <th className="px-4 py-2">Section</th>
+     
             </tr>
           </thead>
           <tbody>
             {stock.map((item) => (
-              <tr key={item._id}>
-                <td className="border text-center px-4 py-2">{item.sku}</td>
+              <tr key={item._id} className="text-sm text-gray-700">
+                 <td className="border text-center px-4 py-2">{item.sku}</td>
                 <td className="border text-center px-4 py-2">{item.name}</td>
                 <td className="border text-center px-4 py-2">{item.category}</td>
                 <td className="border text-center px-4 py-2">{item.stock}</td>
                 <td className="border text-center px-4 py-2">{item.location.name}</td>
+   
               </tr>
             ))}
           </tbody>

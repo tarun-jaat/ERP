@@ -1,46 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TableComponent from "../../Components/TableComponentWithCheckBox";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const columns = [
-    { Header: "Title", accessor: "title" },
-    { Header: "From", accessor: "from" },
-    { Header: "To", accessor: "to" },
-    { Header: "Related To", accessor: "related-to" },
-    { Header: "Contact Name", accessor: "contact-name" },
-    { Header: "Contact Owner", accessor: "contact-owner" }    
-  ];
-  const data = [
-    {
-        title: "Meeting with John Doe",
-        from: "John Doe (Jane@example.com)",
-        to: "Jane Doe (John@example.com)",
-        "related-to": "Math Assignment",
-        "contact-name": "John Doe",
-        "contact-owner": "John Doe"
-      },
-      {
-        title: "Weekly Project Meeting",
-        from: "John Doe (Jane@example.com)",
-        to: "Jane Doe (John@example.com)",
-        "related-to": "Science Project",
-        "contact-name": "John Doe",
-        "contact-owner": "John Doe"
-      },
-      {
-        title: "Review Meeting with Jane Smith",
-        from: "John Doe (Jane@example.com)",
-        to: "Jane Doe (John@example.com)",
-        "related-to": "History Essay",
-        "contact-name": "Jane Smith",
-        "contact-owner": "Jane Smith"
-      }
-      ];
+  { Header: "Title", accessor: "title" },
+  { Header: "From", accessor: "fromTime" },
+  { Header: "To", accessor: "toDate" },
+  { Header: "Related To", accessor: "relatedTo" },
+  { Header: "Participants", accessor: "participants" },
+  { Header: "Meeting Host", accessor: "host" },
+];
+
 function MeetingHome() {
+  const [data, setData] = useState([]); // Initialize an empty array to store the data
   const navigate = useNavigate();
 
+  useEffect(() => {
+    axios.get("https://erp-backend-o5i3.onrender.com/api/v1/meetings")
+      .then(response => {
+        setData(response.data); // Update the state with the fetched data
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   const handleAddClick = () => {
-    navigate("create-meeting");  
+    navigate("create-meeting");
   };
+
   return (
     <div className="w-full h-[90vh] pb-8">
       <div className="text-black mb-4 gap-10  flex justify-end ">

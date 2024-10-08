@@ -115,7 +115,7 @@ function SideBar() {
   };
 
   return (
-    <div className="bg-white  font-inter w-[250px] h-screen text-black">
+    <div className="bg-white overflow-y-scroll font-inter w-[300px] h-screen text-black">
       <div className="flex justify-center transition-all duration-300 items-center gap-3 text-xl py-3 bg-white">
         <ImCart />
         <p>Inventory</p>
