@@ -175,7 +175,7 @@ const Sidebar = () => {
         </ul>
 
         {/* Learning And Development */}
-        <li
+        {/* <li
           className={`px-6 py-3 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg`}
           onMouseEnter={() => setLearningAndDevelopment(true)}
           onMouseLeave={() => setLearningAndDevelopment(false)}
@@ -186,10 +186,10 @@ const Sidebar = () => {
               Learning And Development
             </span>
           </div>
-        </li>
+        </li> */}
         {/* Learning And Development Dropdown Menu */}
 
-        <ul
+        {/* <ul
           className={`ml-8 transition-all duration-200 ease-in-out ${
             learningAndDevelopment
               ? "max-h-40 opacity-100"
@@ -231,7 +231,7 @@ const Sidebar = () => {
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">Career Management</span>
           </li>
-        </ul>
+        </ul> */}
         {/* Compensation And Benefits */}
         <li
           className={`px-6 py-3 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg`}
