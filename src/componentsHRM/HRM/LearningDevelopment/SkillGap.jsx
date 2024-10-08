@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Onboarding() {
+function SkillGap() {
   return (
     <div className='flex w-full justify-center items-center text-3xl'>
       Under Development
@@ -8,4 +8,4 @@ function Onboarding() {
   )
 }
 
-export default Onboarding
+export default SkillGap

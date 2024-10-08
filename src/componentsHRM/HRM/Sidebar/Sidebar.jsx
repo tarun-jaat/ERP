@@ -16,7 +16,7 @@ import { TbDeviceComputerCamera } from "react-icons/tb";
 import { FaUsers } from "react-icons/fa";
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState("/hrm");
+  const [activeItem, setActiveItem] = useState("/hrm/dashboard");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isPerformanceDropdownOpen, setIsPerformanceDropdownOpen] =
     useState(false);
@@ -336,11 +336,11 @@ const Sidebar = () => {
           </li>
           <li
             className={`px-6 py-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg ${
-              activeItem === "/hrm/compensation-analysis"
+              activeItem === "/hrm/compensation-anaysis"
                 ? "bg-gray-100 rounded-l-lg"
                 : ""
             }`}
-            onClick={() => handleClick("/hrm/compensation-analysis")}
+            onClick={() => handleClick("/hrm/compensation-anaysis")}
           >
             <TbDeviceComputerCamera size={24} className="mr-3" />
             <span className="text-sm">Compensation Analysis</span>
