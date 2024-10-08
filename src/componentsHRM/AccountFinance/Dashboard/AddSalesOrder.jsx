@@ -65,7 +65,7 @@ function AddSalesOrder({ onSalesAdded }) {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:9001/api/account-fianance/sales",
+        "https://erp-backend-o5i3.onrender.com/api/account-fianance/sales",
         formData
       );
       // Reset form after submission

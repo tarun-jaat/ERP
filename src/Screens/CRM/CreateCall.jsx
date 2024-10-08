@@ -15,7 +15,7 @@ const ScheduleCallForm = () => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('http://localhost:9001/api/v1/calls/schedule', {
+      const response = await axios.post('https://erp-backend-o5i3.onrender.com/api/v1/calls/schedule', {
         callTo,
         relatedTo,
         callType,

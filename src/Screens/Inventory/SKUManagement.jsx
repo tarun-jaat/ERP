@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:9001/api/v1/sku"; 
+const API_URL = "https://erp-backend-o5i3.onrender.com/api/v1/sku"; 
 
 const SKUManagement = () => {
   const [skuData, setSkuData] = useState([]);

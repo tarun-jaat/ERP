@@ -19,7 +19,7 @@ function ContactsHome() {
     };
 
     useEffect(() => {
-      axios.get('http://localhost:9001/api/v1/contact/getContact') 
+      axios.get('https://erp-backend-o5i3.onrender.com/api/v1/contact/getContact') 
         .then(response => {
           setData(response.data);
         })
