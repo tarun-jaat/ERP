@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Added useEffect import
+import React, { useState, useEffect } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import {
@@ -64,7 +64,7 @@ function EmployeeDatabase() {
   };
 
   return (
-    <div className="w-full flex flex-col p-7">
+    <div className="flex flex-col min-h-screen p-4">
       <div className="flex justify-between">
         <p className="font-serif font-semibold text-gray-700 text-xl">
           / Employee Database
@@ -115,20 +115,40 @@ function EmployeeDatabase() {
         </div>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 flex-grow overflow-x-auto">
+        {" "}
+        {/* Added flex-grow to allow scrolling above pagination */}
         <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-200 text-left text-gray-700 font-semibold">
               <th className="px-4 py-2 border-gray-300 border-2"></th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">S/N</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">First Name</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Last Name</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Gender</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Employee ID</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Phone Number</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Role</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Designation</th>
-              <th className="px-4 py-2 text-sm border-gray-300 border-2">Joined Date</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                S/N
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                First Name
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Last Name
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Gender
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Employee ID
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Phone Number
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Role
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Designation
+              </th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">
+                Joined Date
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -144,17 +164,27 @@ function EmployeeDatabase() {
                     onChange={() => handleSelectRow(indexOfFirstEntry + index)}
                   />
                 </td>
-                <td className="px-4 py-2 border-2 border-gray-300">{indexOfFirstEntry + index + 1}</td>
-                <td className="px-4 py-2 border-2 border-gray-300">{employee.firstName}</td>
-                <td className="px-4 py-2 border-2 border-gray-300">{employee.lastName}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">
+                  {indexOfFirstEntry + index + 1}
+                </td>
+                <td className="px-4 py-2 border-2 border-gray-300">
+                  {employee.firstName}
+                </td>
+                <td className="px-4 py-2 border-2 border-gray-300">
+                  {employee.lastName}
+                </td>
                 <td className="px-4 py-2 border-2 border-gray-300">
                   {employee.gender
                     ? employee.gender.charAt(0).toUpperCase() +
                       employee.gender.slice(1)
                     : "N/A"}
                 </td>
-                <td className="px-4 py-2 border-2 border-gray-300">{employee.employeeID}</td>
-                <td className="px-4 py-2 border-2 border-gray-300">{employee.phone}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">
+                  {employee.employeeID}
+                </td>
+                <td className="px-4 py-2 border-2 border-gray-300">
+                  {employee.phone}
+                </td>
                 <td className="px-4 py-2 border-2 border-gray-300">
                   {employee.role
                     ? employee.role.charAt(0).toUpperCase() +
@@ -174,23 +204,38 @@ function EmployeeDatabase() {
             ))}
           </tbody>
         </table>
+      </div>
 
-        <div className="flex justify-around items-center mt-5 absolute bottom-10 w-[70%]">
-          <div className="flex gap-2 items-center">
-            <MdKeyboardArrowLeft />
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => handlePageChange(i + 1)}
-                className={`h-8 w-8 items-center justify-center rounded-md ${
-                  currentPage === i + 1 ? "bg-gray-400" : ""
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
-            <MdKeyboardArrowRight />
-          </div>
+      {/* Pagination container */}
+      <div className="flex justify-center items-center mt-5 mb-5 fixed bottom-0 left-0 right-0">
+        {" "}
+        {/* Made fixed to the bottom */}
+        <div className="flex gap-2 items-center">
+          <MdKeyboardArrowLeft
+            className={`cursor-pointer ${
+              currentPage === 1 ? "text-gray-300" : "text-black"
+            }`}
+            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+          />
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={`h-8 w-8 items-center justify-center rounded-md ${
+                currentPage === i + 1 ? "bg-gray-400" : "bg-gray-200"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <MdKeyboardArrowRight
+            className={`cursor-pointer ${
+              currentPage === totalPages ? "text-gray-300" : "text-black"
+            }`}
+            onClick={() =>
+              currentPage < totalPages && handlePageChange(currentPage + 1)
+            }
+          />
         </div>
       </div>
     </div>

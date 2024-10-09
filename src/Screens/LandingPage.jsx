@@ -29,8 +29,7 @@ const Data = [
 
 function LandingPage() {
   return (
-    <div className="h-screen w-full flex-col flex items-center justify-center bg-richblack-5">
-      <nav className="flex items-center h-14 w-full bg-white justify-between px-8"></nav>
+    <div className="min-h-screen w-full flex-col flex items-center justify-center bg-richblack-5">
       <div className="flex flex-wrap gap-4 w-[50%] items-center h-full justify-center">
         {Data.map((item, index) => (
           <Link key={index} to={item.path}>
