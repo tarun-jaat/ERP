@@ -1,9 +1,10 @@
 import React from "react";
+import bg from "../../../assets/images/undermaintainance.jpg";
 
 function PolicyManagement() {
   return (
-    <div className="flex w-full justify-center items-center text-3xl">
-      Under Development
+    <div className="flex flex-col  items-center w-full bg-gray-100">
+      <img src={bg} alt="Under Maintenance" className="mb-4 w-1/3 h-[70vh]" />
     </div>
   );
 }

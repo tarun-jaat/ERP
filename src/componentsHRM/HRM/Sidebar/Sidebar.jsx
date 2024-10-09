@@ -32,7 +32,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="bg-white w-64 min-h-screen fixed top-16 left-10 z-10">
+    <aside className="bg-white w-64 min-h-screen fixed top-16 z-10 ">
       <ul className="py-4">
         {/* Dashboard */}
         <li
@@ -150,7 +150,7 @@ const Sidebar = () => {
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">Goal Setting</span>
           </li>
-          <li
+          {/* <li
             className={`px-6 py-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg ${
               activeItem === "/hrm/performance-reviews"
                 ? "bg-gray-100 rounded-l-lg"
@@ -160,8 +160,8 @@ const Sidebar = () => {
           >
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">Performance Reviews</span>
-          </li>
-          <li
+          </li> */}
+          {/* <li
             className={`px-6 py-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg ${
               activeItem === "/hrm/360-feedback"
                 ? "bg-gray-100 rounded-l-lg"
@@ -171,7 +171,7 @@ const Sidebar = () => {
           >
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">360 Degree Feedback</span>
-          </li>
+          </li> */}
         </ul>
 
         {/* Learning And Development */}
@@ -255,7 +255,7 @@ const Sidebar = () => {
           onMouseEnter={() => setCompensationAndBenefits(true)}
           onMouseLeave={() => setCompensationAndBenefits(false)}
         >
-          <li
+          {/* <li
             className={`px-6 py-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg ${
               activeItem === "/hrm/payroll-management"
                 ? "bg-gray-100 rounded-l-lg"
@@ -265,7 +265,7 @@ const Sidebar = () => {
           >
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">Payroll Management</span>
-          </li>
+          </li> */}
           <li
             className={`px-6 py-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg ${
               activeItem === "/hrm/benefits-administration"
@@ -277,7 +277,7 @@ const Sidebar = () => {
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">Benefits Administration</span>
           </li>
-          <li
+          {/* <li
             className={`px-6 py-2 hover:bg-gray-100 flex items-center cursor-pointer rounded-l-lg ${
               activeItem === "/hrm/compensation-analysis"
                 ? "bg-gray-100 rounded-l-lg"
@@ -287,7 +287,7 @@ const Sidebar = () => {
           >
             <PiArrowElbowDownRight size={24} className="mr-3" />
             <span className="text-sm">Compensation Analysis</span>
-          </li>
+          </li> */}
         </ul>
         {/* Compilance And Risk Management */}
         <li

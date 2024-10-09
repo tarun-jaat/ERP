@@ -121,18 +121,18 @@ function Jobposting() {
 
       {/* Employee Table */}
       <div className="mt-6">
-        <table className="min-w-full table-auto border-collapse">
+        <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-100 text-left text-gray-700 font-semibold">
+            <tr className="bg-gray-200 text-left text-gray-700 font-semibold">
               <th className="px-4 py-2 flex gap-20">
                 <input type="checkbox" />
-                <th className="px-4 py-2 text-sm">Title</th>
+                <th className="px-4 py-2 text-sm ">Title</th>
               </th>
-              <th className="px-4 py-2 text-sm">Title</th>
-              <th className="px-4 py-2 text-sm">Title</th>
-              <th className="px-4 py-2 text-sm">Title</th>
-              <th className="px-4 py-2 text-sm">Title</th>
-              <th className="px-4 py-2 text-sm">Title</th>
+              <th className="px-4 py-2 text-sm ">Title</th>
+              <th className="px-4 py-2 text-sm ">Title</th>
+              <th className="px-4 py-2 text-sm ">Title</th>
+              <th className="px-4 py-2 text-sm ">Title</th>
+              <th className="px-4 py-2 text-sm ">Title</th>
             </tr>
           </thead>
           <tbody>
@@ -141,7 +141,7 @@ function Jobposting() {
                 key={indexOfFirstEntry + index}
                 className=" text-gray-700 hover:bg-gray-50"
               >
-                <td className="px-4 py-2 text-sm flex flex-row items-center gap-10">
+                <td className="px-4 py-2 text-sm  flex flex-row items-center gap-10">
                   <input
                     type="checkbox"
                     checked={selectedRows.includes(indexOfFirstEntry + index)}
@@ -150,15 +150,15 @@ function Jobposting() {
                   <FaPlus className="bg-blue-800 p-1" color="white" size={20} />
                   {employee.title}
                 </td>
-                <td className="px-4 py-2 text-sm">
+                <td className="px-4 py-2 text-sm ">
                   <span className="bg-gray-200 p-2 rounded-md">
                     {employee.tag}
                   </span>
                 </td>
-                <td className="px-4 py-2 text-sm text-blue-700">
+                <td className="px-4 py-2 text-sm  text-blue-700">
                   {employee.link}
                 </td>
-                <td className="px-4 py-2 text-sm">
+                <td className="px-4 py-2 text-sm ">
                   <div
                     onClick={() => handleToggle(indexOfFirstEntry + index)}
                     className={`relative w-14 h-6 flex items-center rounded-full cursor-pointer ${
@@ -176,11 +176,11 @@ function Jobposting() {
                     />
                   </div>
                 </td>
-                <td className="px-4 py-2 text-sm flex flex-row items-center gap-2">
+                <td className="px-4 py-2 text-sm  flex flex-row items-center gap-2">
                   <FaRegUserCircle />
                   {employee.phoneNumber}
                 </td>
-                <td className="px-4 py-2 text-sm text-blue-700">
+                <td className="px-4 py-2 text-sm  text-blue-700">
                   {employee.action}
                 </td>
               </tr>

@@ -60,7 +60,7 @@ function EmployeeDatabase() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(); // Format the date to a readable format
+    return date.toLocaleDateString();
   };
 
   return (
@@ -116,19 +116,19 @@ function EmployeeDatabase() {
       </div>
 
       <div className="mt-8">
-        <table className="min-w-full table-auto border-collapse">
+        <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-100 text-left text-gray-700 font-semibold">
-              <th className="px-4 py-2"></th>
-              <th className="px-4 py-2 text-sm">S/N</th>
-              <th className="px-4 py-2 text-sm">First Name</th>
-              <th className="px-4 py-2 text-sm">Last Name</th>
-              <th className="px-4 py-2 text-sm">Gender</th>
-              <th className="px-4 py-2 text-sm">Employee ID</th>
-              <th className="px-4 py-2 text-sm">Phone Number</th>
-              <th className="px-4 py-2 text-sm">Role</th>
-              <th className="px-4 py-2 text-sm">Designation</th>
-              <th className="px-4 py-2 text-sm">Joined Date</th>
+            <tr className="bg-gray-200 text-left text-gray-700 font-semibold">
+              <th className="px-4 py-2 border-gray-300 border-2"></th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">S/N</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">First Name</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Last Name</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Gender</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Employee ID</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Phone Number</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Role</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Designation</th>
+              <th className="px-4 py-2 text-sm border-gray-300 border-2">Joined Date</th>
             </tr>
           </thead>
           <tbody>
@@ -137,37 +137,37 @@ function EmployeeDatabase() {
                 key={indexOfFirstEntry + index}
                 className="text-gray-700 hover:bg-gray-50"
               >
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 border-2 border-gray-300">
                   <input
                     type="checkbox"
                     checked={selectedRows.includes(indexOfFirstEntry + index)}
                     onChange={() => handleSelectRow(indexOfFirstEntry + index)}
                   />
                 </td>
-                <td className="px-4 py-2">{indexOfFirstEntry + index + 1}</td>
-                <td className="px-4 py-2">{employee.firstName}</td>
-                <td className="px-4 py-2">{employee.lastName}</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 border-2 border-gray-300">{indexOfFirstEntry + index + 1}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">{employee.firstName}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">{employee.lastName}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">
                   {employee.gender
                     ? employee.gender.charAt(0).toUpperCase() +
                       employee.gender.slice(1)
                     : "N/A"}
                 </td>
-                <td className="px-4 py-2">{employee.employeeID}</td>
-                <td className="px-4 py-2">{employee.phone}</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 border-2 border-gray-300">{employee.employeeID}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">{employee.phone}</td>
+                <td className="px-4 py-2 border-2 border-gray-300">
                   {employee.role
                     ? employee.role.charAt(0).toUpperCase() +
                       employee.role.slice(1)
                     : "N/A"}
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 border-2 border-gray-300">
                   {employee.position
                     ? employee.position.charAt(0).toUpperCase() +
                       employee.position.slice(1)
                     : "N/A"}
                 </td>
-                <td className="px-4 py-2 flex flex-row items-center gap-4">
+                <td className="px-4 py-2 border-2 border-gray-200 flex flex-row items-center gap-4">
                   {formatDate(employee.joinedDate)} <MdOutlineDateRange />
                 </td>
               </tr>
@@ -176,29 +176,6 @@ function EmployeeDatabase() {
         </table>
 
         <div className="flex justify-around items-center mt-5 absolute bottom-10 w-[70%]">
-          {/* <div className="flex items-center gap-2">
-            <p className="text-sm">
-              Showing{" "}
-              <span className="font-semibold">{indexOfFirstEntry + 1}</span> to{" "}
-              <span className="font-semibold">
-                {Math.min(indexOfLastEntry, staffData.length)}
-              </span>{" "}
-              of <span className="font-semibold">{staffData.length}</span>{" "}
-              entries
-            </p>
-            <select
-              value={entriesPerPage}
-              onChange={(e) => {
-                setEntriesPerPage(parseInt(e.target.value));
-                setCurrentPage(1);
-              }}
-              className="p-2 bg-white border rounded text-sm"
-            >
-              <option value={5}>5/page</option>
-              <option value={10}>10/page</option>
-              <option value={20}>20/page</option>
-            </select>
-          </div> */}
           <div className="flex gap-2 items-center">
             <MdKeyboardArrowLeft />
             {[...Array(totalPages)].map((_, i) => (
@@ -213,12 +190,6 @@ function EmployeeDatabase() {
               </button>
             ))}
             <MdKeyboardArrowRight />
-            <div className="flex items-center gap-5 text-sm">
-              <p>Go to Page</p>
-              <div className="bg-white items-center flex justify-center h-8 w-8 rounded-sm">
-                <p>2</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
