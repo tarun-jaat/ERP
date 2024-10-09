@@ -12,23 +12,20 @@ function FilterSearchBar() {
           <button className="w-16 h-10 bg-cyan-500 text-white rounded-md">
             Filter
           </button>
-
           <div className="relative">
             <span className="absolute left-3 top-2 text-gray-400">
               <IoIosSearch size={24} />
             </span>
             <input
               type="text"
-              placeholder="Search or type a command (CTRL+G)"
+              placeholder="Search"
               className="pl-10 pr-4 py-2 w-80 bg-white rounded-full focus:outline-none"
             />
           </div>
-
           <div className="relative">
             <button onClick={toggleMenu} className="text-gray-500">
               <HiOutlineDotsVertical size={24} color="black" />
             </button>
-
             {/* Dropdown Menu */}
             {isMenuOpen && (
               <div className="absolute left-5 w-40 bg-white rounded-md shadow-lg z-10">

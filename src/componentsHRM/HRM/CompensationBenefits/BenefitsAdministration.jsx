@@ -88,7 +88,7 @@ const BenefitsAdministration = () => {
 
       {/* Toggle Button to Add Compensation */}
       <button
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 float-right"
+        className="bg-cyan-500 text-white px-4 py-2 rounded mb-4 float-right"
         onClick={() => setShowForm(!showForm)}
       >
         {showForm ? "Cancel" : "Add Compensation Benefits"}
@@ -124,370 +124,407 @@ const BenefitsAdministration = () => {
               ))}
             </select>
           </div>
+          <div className="flex gap-4 w-full">
+            {/* Payroll Section */}
+            <div className="flex flex-col w-full">
+              <h4 className="text-lg font-semibold mb-2">
+                Payroll Information
+              </h4>
+              <div className="mb-4">
+                <label htmlFor="salary" className="block">
+                  Salary:
+                </label>
+                <input
+                  type="number"
+                  id="salary"
+                  value={payroll.salary}
+                  onChange={(e) =>
+                    setPayroll({ ...payroll, salary: e.target.value })
+                  }
+                  required
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="disbursementDate" className="block">
+                  Disbursement Date:
+                </label>
+                <input
+                  type="date"
+                  id="disbursementDate"
+                  value={payroll.disbursementDate}
+                  onChange={(e) =>
+                    setPayroll({ ...payroll, disbursementDate: e.target.value })
+                  }
+                  required
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="status" className="block">
+                  Status:
+                </label>
+                <select
+                  id="status"
+                  value={payroll.status}
+                  onChange={(e) =>
+                    setPayroll({ ...payroll, status: e.target.value })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Failed">Failed</option>
+                </select>
+              </div>
+            </div>
 
-          {/* Payroll Section */}
-          <h4 className="text-lg font-semibold mb-2">Payroll Information</h4>
-          <div className="mb-4">
-            <label htmlFor="salary" className="block">
-              Salary:
-            </label>
-            <input
-              type="number"
-              id="salary"
-              value={payroll.salary}
-              onChange={(e) =>
-                setPayroll({ ...payroll, salary: e.target.value })
-              }
-              required
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="disbursementDate" className="block">
-              Disbursement Date:
-            </label>
-            <input
-              type="date"
-              id="disbursementDate"
-              value={payroll.disbursementDate}
-              onChange={(e) =>
-                setPayroll({ ...payroll, disbursementDate: e.target.value })
-              }
-              required
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="status" className="block">
-              Status:
-            </label>
-            <select
-              id="status"
-              value={payroll.status}
-              onChange={(e) =>
-                setPayroll({ ...payroll, status: e.target.value })
-              }
-              className="border rounded px-2 py-1 w-full"
-            >
-              <option value="Pending">Pending</option>
-              <option value="Completed">Completed</option>
-              <option value="Failed">Failed</option>
-            </select>
-          </div>
+            {/* Benefits Section */}
+            <div className="flex flex-col w-full">
+              <h4 className="text-lg font-semibold mb-2">
+                Benefits Information
+              </h4>
+              {/* Health Insurance */}
+              <h5 className="font-semibold">Health Insurance</h5>
+              <div className="mb-4">
+                <label htmlFor="healthProvider" className="block">
+                  Provider:
+                </label>
+                <input
+                  type="text"
+                  id="healthProvider"
+                  value={benefits.healthInsurance.provider}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      healthInsurance: {
+                        ...benefits.healthInsurance,
+                        provider: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="healthPolicyNumber" className="block">
+                  Policy Number:
+                </label>
+                <input
+                  type="text"
+                  id="healthPolicyNumber"
+                  value={benefits.healthInsurance.policyNumber}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      healthInsurance: {
+                        ...benefits.healthInsurance,
+                        policyNumber: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="healthCoverage" className="block">
+                  Coverage:
+                </label>
+                <input
+                  type="text"
+                  id="healthCoverage"
+                  value={benefits.healthInsurance.coverage}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      healthInsurance: {
+                        ...benefits.healthInsurance,
+                        coverage: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="healthStartDate" className="block">
+                  Start Date:
+                </label>
+                <input
+                  type="date"
+                  id="healthStartDate"
+                  value={benefits.healthInsurance.startDate}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      healthInsurance: {
+                        ...benefits.healthInsurance,
+                        startDate: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="healthEndDate" className="block">
+                  End Date:
+                </label>
+                <input
+                  type="date"
+                  id="healthEndDate"
+                  value={benefits.healthInsurance.endDate}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      healthInsurance: {
+                        ...benefits.healthInsurance,
+                        endDate: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+            </div>
 
-          {/* Benefits Section */}
-          <h4 className="text-lg font-semibold mb-2">Benefits Information</h4>
-          {/* Health Insurance */}
-          <h5 className="font-semibold">Health Insurance</h5>
-          <div className="mb-4">
-            <label htmlFor="healthProvider" className="block">
-              Provider:
-            </label>
-            <input
-              type="text"
-              id="healthProvider"
-              value={benefits.healthInsurance.provider}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  healthInsurance: {
-                    ...benefits.healthInsurance,
-                    provider: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="healthPolicyNumber" className="block">
-              Policy Number:
-            </label>
-            <input
-              type="text"
-              id="healthPolicyNumber"
-              value={benefits.healthInsurance.policyNumber}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  healthInsurance: {
-                    ...benefits.healthInsurance,
-                    policyNumber: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="healthCoverage" className="block">
-              Coverage:
-            </label>
-            <input
-              type="text"
-              id="healthCoverage"
-              value={benefits.healthInsurance.coverage}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  healthInsurance: {
-                    ...benefits.healthInsurance,
-                    coverage: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="healthStartDate" className="block">
-              Start Date:
-            </label>
-            <input
-              type="date"
-              id="healthStartDate"
-              value={benefits.healthInsurance.startDate}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  healthInsurance: {
-                    ...benefits.healthInsurance,
-                    startDate: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="healthEndDate" className="block">
-              End Date:
-            </label>
-            <input
-              type="date"
-              id="healthEndDate"
-              value={benefits.healthInsurance.endDate}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  healthInsurance: {
-                    ...benefits.healthInsurance,
-                    endDate: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
+            {/* Retirement Plan */}
+            <div className="flex flex-col w-full">
+              <h5 className="font-semibold">Retirement Plan</h5>
+              <div className="mb-4">
+                <label htmlFor="retirementProvider" className="block">
+                  Provider:
+                </label>
+                <input
+                  type="text"
+                  id="retirementProvider"
+                  value={benefits.retirementPlan.provider}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      retirementPlan: {
+                        ...benefits.retirementPlan,
+                        provider: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="planDetails" className="block">
+                  Plan Details:
+                </label>
+                <input
+                  type="text"
+                  id="planDetails"
+                  value={benefits.retirementPlan.planDetails}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      retirementPlan: {
+                        ...benefits.retirementPlan,
+                        planDetails: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="retirementStartDate" className="block">
+                  Start Date:
+                </label>
+                <input
+                  type="date"
+                  id="retirementStartDate"
+                  value={benefits.retirementPlan.startDate}
+                  onChange={(e) =>
+                    setBenefits({
+                      ...benefits,
+                      retirementPlan: {
+                        ...benefits.retirementPlan,
+                        startDate: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+            </div>
 
-          {/* Retirement Plan */}
-          <h5 className="font-semibold">Retirement Plan</h5>
-          <div className="mb-4">
-            <label htmlFor="retirementProvider" className="block">
-              Provider:
-            </label>
-            <input
-              type="text"
-              id="retirementProvider"
-              value={benefits.retirementPlan.provider}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  retirementPlan: {
-                    ...benefits.retirementPlan,
-                    provider: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="planDetails" className="block">
-              Plan Details:
-            </label>
-            <input
-              type="text"
-              id="planDetails"
-              value={benefits.retirementPlan.planDetails}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  retirementPlan: {
-                    ...benefits.retirementPlan,
-                    planDetails: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="retirementStartDate" className="block">
-              Start Date:
-            </label>
-            <input
-              type="date"
-              id="retirementStartDate"
-              value={benefits.retirementPlan.startDate}
-              onChange={(e) =>
-                setBenefits({
-                  ...benefits,
-                  retirementPlan: {
-                    ...benefits.retirementPlan,
-                    startDate: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-
-          {/* Compensation Analysis */}
-          <h4 className="text-lg font-semibold mb-2">Compensation Analysis</h4>
-          <div className="mb-4">
-            <label htmlFor="marketSalaryRangeMin" className="block">
-              Market Salary Range (Min):
-            </label>
-            <input
-              type="number"
-              id="marketSalaryRangeMin"
-              value={compensationAnalysis.marketSalaryRange.min}
-              onChange={(e) =>
-                setCompensationAnalysis({
-                  ...compensationAnalysis,
-                  marketSalaryRange: {
-                    ...compensationAnalysis.marketSalaryRange,
-                    min: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="marketSalaryRangeMax" className="block">
-              Market Salary Range (Max):
-            </label>
-            <input
-              type="number"
-              id="marketSalaryRangeMax"
-              value={compensationAnalysis.marketSalaryRange.max}
-              onChange={(e) =>
-                setCompensationAnalysis({
-                  ...compensationAnalysis,
-                  marketSalaryRange: {
-                    ...compensationAnalysis.marketSalaryRange,
-                    max: e.target.value,
-                  },
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="companySalary" className="block">
-              Company Salary:
-            </label>
-            <input
-              type="number"
-              id="companySalary"
-              value={compensationAnalysis.companySalary}
-              onChange={(e) =>
-                setCompensationAnalysis({
-                  ...compensationAnalysis,
-                  companySalary: e.target.value,
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="notes" className="block">
-              Notes:
-            </label>
-            <textarea
-              id="notes"
-              value={compensationAnalysis.notes}
-              onChange={(e) =>
-                setCompensationAnalysis({
-                  ...compensationAnalysis,
-                  notes: e.target.value,
-                })
-              }
-              className="border rounded px-2 py-1 w-full"
-              rows="3"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="isCompetitive" className="block">
-              Is Salary Competitive?
-            </label>
-            <input
-              type="checkbox"
-              id="isCompetitive"
-              checked={compensationAnalysis.isCompetitive}
-              onChange={() =>
-                setCompensationAnalysis({
-                  ...compensationAnalysis,
-                  isCompetitive: !compensationAnalysis.isCompetitive,
-                })
-              }
-              className="mr-2"
-            />
-            <span>Yes</span>
+            {/* Compensation Analysis */}
+            <div className="flex flex-col w-full">
+              <h4 className="text-lg font-semibold mb-2">
+                Compensation Analysis
+              </h4>
+              <div className="mb-4">
+                <label htmlFor="marketSalaryRangeMin" className="block">
+                  Market Salary Range (Min):
+                </label>
+                <input
+                  type="number"
+                  id="marketSalaryRangeMin"
+                  value={compensationAnalysis.marketSalaryRange.min}
+                  onChange={(e) =>
+                    setCompensationAnalysis({
+                      ...compensationAnalysis,
+                      marketSalaryRange: {
+                        ...compensationAnalysis.marketSalaryRange,
+                        min: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="marketSalaryRangeMax" className="block">
+                  Market Salary Range (Max):
+                </label>
+                <input
+                  type="number"
+                  id="marketSalaryRangeMax"
+                  value={compensationAnalysis.marketSalaryRange.max}
+                  onChange={(e) =>
+                    setCompensationAnalysis({
+                      ...compensationAnalysis,
+                      marketSalaryRange: {
+                        ...compensationAnalysis.marketSalaryRange,
+                        max: e.target.value,
+                      },
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="companySalary" className="block">
+                  Company Salary:
+                </label>
+                <input
+                  type="number"
+                  id="companySalary"
+                  value={compensationAnalysis.companySalary}
+                  onChange={(e) =>
+                    setCompensationAnalysis({
+                      ...compensationAnalysis,
+                      companySalary: e.target.value,
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="notes" className="block">
+                  Notes:
+                </label>
+                <textarea
+                  id="notes"
+                  value={compensationAnalysis.notes}
+                  onChange={(e) =>
+                    setCompensationAnalysis({
+                      ...compensationAnalysis,
+                      notes: e.target.value,
+                    })
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                  rows="3"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="isCompetitive" className="block">
+                  Is Salary Competitive?
+                </label>
+                <input
+                  type="checkbox"
+                  id="isCompetitive"
+                  checked={compensationAnalysis.isCompetitive}
+                  onChange={() =>
+                    setCompensationAnalysis({
+                      ...compensationAnalysis,
+                      isCompetitive: !compensationAnalysis.isCompetitive,
+                    })
+                  }
+                  className="mr-2"
+                />
+                <span>Yes</span>
+              </div>
+            </div>
           </div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded"
-          >
-            Submit
-          </button>
+          <div className="flex justify-center items-center w-full">
+            <button
+              type="submit"
+              className="bg-cyan-500 text-white px-4 py-2 rounded"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       )}
 
-      <div>
-        <table className="min-w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-gray-300 p-2">Employee</th>
-              <th className="border border-gray-300 p-2">Salary</th>
-              <th className="border border-gray-300 p-2">Status</th>
-              <th className="border border-gray-300 p-2">
-                Health Insurance Provider
-              </th>
-              <th className="border border-gray-300 p-2">
-                Market Salary Range
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {compensations.map((comp) => (
-              <tr key={comp._id} className="hover:bg-gray-100">
-                <td className="border border-gray-300 p-2 text-center">
-                  {comp.employee.firstName} {comp.employee.lastName} (
-                  {comp.employee.position})
-                </td>
-                <td className="border border-gray-300 p-2 text-center">
-                  {comp.payroll.salary}
-                </td>
-                <td className="border border-gray-300 p-2 text-center">
-                  {comp.payroll.status}
-                </td>
-                <td className="border border-gray-300 p-2 text-center">
-                  {comp.benefits.healthInsurance.provider}
-                </td>
-                <td className="border border-gray-300 p-2 text-center">
-                  {comp.compensationAnalysis.marketSalaryRange.min} -{" "}
-                  {comp.compensationAnalysis.marketSalaryRange.max}
-                </td>
+      {/* Compensation Table */}
+      {!showForm && (
+        <div>
+          <table className="min-w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 p-2">Employee</th>
+                <th className="border border-gray-300 p-2">Salary</th>
+                <th className="border border-gray-300 p-2">
+                  Disbursement Date
+                </th>
+                <th className="border border-gray-300 p-2">Status</th>
+                <th className="border border-gray-300 p-2">Health Insurance</th>
+                <th className="border border-gray-300 p-2">Retirement Plan</th>
+                <th className="border border-gray-300 p-2">Company Salary</th>
+                <th className="border border-gray-300 p-2">Competitive</th>
+                <th className="border border-gray-300 p-2">Notes</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {compensations.map((compensation) => (
+                <tr key={compensation._id}>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.employee?.firstName}{" "}
+                    {compensation.employee?.lastName}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.payroll.salary}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {new Date(
+                      compensation.payroll.disbursementDate
+                    ).toLocaleDateString()}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.payroll.status}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.benefits.healthInsurance?.provider}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.benefits.retirementPlan?.provider}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.compensationAnalysis.companySalary}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.compensationAnalysis.isCompetitive
+                      ? "Yes"
+                      : "No"}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {compensation.compensationAnalysis.notes}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

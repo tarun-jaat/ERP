@@ -12,7 +12,7 @@ const SearchBar = () => {
         type="text"
         name="text"
         id="input"
-        placeholder="Search or type a command (Ctrl + G)"
+        placeholder="Search"
         className="w-[389px] bg-[#F3F3F3] h-full border-none outline-none text-sm caret-blue-500"
       />
     </div>
